@@ -1,58 +1,58 @@
 (() => {
-  let e = [];
+  let bookArray = [];
 
   function t(t) {
     t.preventDefault();
-    const n = document.querySelector("#inputBookTitle"),
-      o = document.querySelector("#inputBookAuthor"),
-      d = document.querySelector("#inputBookYear"),
-      i = document.querySelector("#inputBookIsComplete"),
+    const judul = document.querySelector("#masukanJudul"),
+      penulis = document.querySelector("#masukanPenulis"),
+      tahun = document.querySelector("#masukanTahun"),
+      selesai = document.querySelector("#masukanBukuSelesai"),
       c = {
         id: +new Date(),
-        title: n.value,
-        author: o.value,
-        year: d.value,
-        isComplete: i.checked,
+        title: judul.value,
+        author: penulis.value,
+        year: Number(tahun.value),
+        isComplete: selesai.checked,
       };
 
-    console.log(c), e.push(c), document.dispatchEvent(new Event("bookChanged"));
+    console.log(c), bookArray.push(c), document.dispatchEvent(new Event("bookChanged"));
   }
 
   function n(t) {
     t.preventDefault();
-    const n = document.querySelector("#searchBookTitle");
+    const cari = document.querySelector("#cariJudulBuku");
 
-    (query = n.value),
+    (query = cari.value),
       query
         ? c(
-            e.filter(function (e) {
-              return e.title.toLowerCase().includes(query.toLowerCase());
+            bookArray.filter(function (book) {
+              return book.title.toLowerCase().includes(query.toLowerCase());
             })
           )
-        : c(e);
+        : c(bookArray);
   }
 
   function o(t) {
-    const n = Number(t.target.id),
-      o = e.findIndex(function (e) {
-        return e.id === n;
+    const idBuku = Number(t.target.id),
+      indexBuku = bookArray.findIndex(function (book) {
+        return book.id === idBuku;
       });
-    -1 !== o &&
-      ((e[o] = {
-        ...e[o],
+    -1 !== indexBuku &&
+      ((bookArray[indexBuku] = {
+        ...bookArray[indexBuku],
         isComplete: !0,
       }),
       document.dispatchEvent(new Event("bookChanged")));
   }
 
   function d(t) {
-    const n = Number(t.target.id),
-      o = e.findIndex(function (e) {
-        return e.id === n;
+    const idBuku = Number(t.target.id),
+      indexBuku = bookArray.findIndex(function (book) {
+        return book.id === idBuku;
       });
-    -1 !== o &&
-      ((e[o] = {
-        ...e[o],
+    -1 !== indexBuku &&
+      ((bookArray[indexBuku] = {
+        ...bookArray[indexBuku],
         isComplete: !1,
       }),
       document.dispatchEvent(new Event("bookChanged")));
@@ -61,7 +61,7 @@
   function i(t) {
     t.preventDefault();
     const bookId = Number(t.target.id);
-    const bookIndex = e.findIndex((book) => book.id === bookId);
+    const bookIndex = bookArray.findIndex((book) => book.id === bookId);
 
     if (bookIndex !== -1) {
       swal({
@@ -72,7 +72,7 @@
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          e.splice(bookIndex, 1);
+          bookArray.splice(bookIndex, 1);
           document.dispatchEvent(new Event("bookChanged"));
           swal("Buku berhasil dihapus", {
             icon: "success",
@@ -83,8 +83,8 @@
   }
 
   function c(e) {
-    const t = document.querySelector("#incompleteBookshelfList"),
-      n = document.querySelector("#completeBookshelfList");
+    const t = document.querySelector("#belumSelesai"),
+      n = document.querySelector("#selesaiBaca");
     (t.innerHTML = ""), (n.innerHTML = "");
 
     for (const c of e) {
@@ -125,17 +125,17 @@
   }
 
   function a() {
-    !(function (e) {
-      localStorage.setItem("books", JSON.stringify(e));
-    })(e),
-      c(e);
+    !(function (book) {
+      localStorage.setItem("books", JSON.stringify(book));
+    })(bookArray),
+      c(bookArray);
   }
 
   window.addEventListener("load", function () {
-    (e = JSON.parse(localStorage.getItem("books")) || []), c(e);
+    (bookArray = JSON.parse(localStorage.getItem("books")) || []), c(bookArray);
 
-    const o = document.querySelector("#inputBook"),
-      d = document.querySelector("#searchBook");
+    const o = document.querySelector("#masukanBuku"),
+      d = document.querySelector("#cariBuku");
 
     o.addEventListener("submit", t), d.addEventListener("submit", n), document.addEventListener("bookChanged", a);
   });

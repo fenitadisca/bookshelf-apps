@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fenita Bookshelf Apps</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="head_bar">
+        <h1 class="head_bar_title">Fenita Bookshelf Apps</h1>
+    </header>
+    <main>
+      <section class="rak">
+        <h2>Cari Buku</h2>
+        <form id="cariBuku">
+          <label for="cariJudulBuku">Judul</label>
+          <input id="cariJudulBuku" type="text" />
+          <button id="searchSubmit" type="submit">Cari</button>
+        </form>
+      </section>
+
+        <section class="sec-input">
+            <h2>Masukkan Buku Baru</h2>
+            <form id="masukanBuku">
+                <div class="input">
+                    <label for="masukanJudul">Judul Buku</label>
+                    <input id="masukanJudul" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="masukanPenulis">Penulis Buku</label>
+                    <input id="masukanPenulis" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="masukanTahun">Tahun Terbit Buku</label>
+                    <input id="masukanTahun" type="number" required>
+                </div>
+                <div class="input_inline">
+                    <label for="masukanBukuSelesai" id="inputBukuSelesaiLabel">Buku selesai dibaca</label>
+                    <input id="masukanBukuSelesai" type="checkbox">
+                </div>
+                <button id="submitBuku">Masukkan Buku ke Rak <span id="tipeBuku"><strong>Belum Dibaca</strong></span></button>
+                <button id="editBuku">Edit Buku dan Masukkan ke Rak <span id="editTipeBuku"><strong>Belum Dibaca</strong></strong></span></button>
+            </form>
+        </section>
+
+        <section class="rak">
+            <h2>Belum selesai dibaca</h2>
+            <div id="belumSelesai" class="book_list">
+                     <div class="action">
+                       <button class="green">Selesai dibaca</button>
+                       <button class="red">Hapus buku</button>
+                     </div>
+            </div>
+          </section>
+
+        <section class="rak">
+            <h2>Selesai dibaca</h2>
+            <div id="selesaiBaca" class="book_list">
+                <div class="action">
+                  <button class="green">Belum selesai di Baca</button>
+                  <button class="red">Hapus buku</button>
+                </div>
+            </div>
+          </section>
+    </main>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="try.js"></script>
+</body>
+</html>
